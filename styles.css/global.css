@@ -53,7 +53,7 @@
     background-color: var(--bg-primary);
     
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 4.5rem 8.375rem 9.5rem;
 }
 
@@ -69,7 +69,7 @@
     }
 }
 
-h1,p,label,span{
+h1,p,span{
     color: var(--content-primary);
 }
 
@@ -84,7 +84,42 @@ h3 {
     font: var(--paragraph-medium);
 }
 
-p#description {
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.feedback-message {
+    font: var(--paragraph-medium);
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid transparent;
+}
+
+.feedback-message:empty {
+    display: none;
+}
+
+.feedback-message--error {
+    color: var(--accent-red);
+    background: color-mix(in srgb, var(--accent-red) 12%, transparent);
+    border-color: color-mix(in srgb, var(--accent-red) 35%, transparent);
+}
+
+.feedback-message--success {
+    color: var(--accent-green);
+    background: color-mix(in srgb, var(--accent-green) 12%, transparent);
+    border-color: color-mix(in srgb, var(--accent-green) 35%, transparent);
+}
+
+p.description {
     font: var(--paragraph-small);
     padding: .3rem 2rem;  
 }
@@ -143,6 +178,10 @@ p {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    border: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
 
     & .fields-row {
         display: flex;
@@ -159,7 +198,7 @@ p {
         & label {
             font: var(--label-medium);
             text-transform: uppercase;
-            color: var(--content-primary);
+            color: var(--content-secondary);
         }
 
         & input[type="number"] {
@@ -197,6 +236,7 @@ p {
         display: flex;
         align-items: center;
         gap: 0.75rem;
+        cursor: pointer;
 
         & > span {
             font: var(--paragraph-medium);
@@ -247,6 +287,10 @@ p {
     }
 
     & .draw-button {
+        &.hidden {
+            display: none;
+        }
+
         & button {
             width: 100%;
             height: 3.5rem;
@@ -254,18 +298,24 @@ p {
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            border: none;
+            border: 2px solid transparent;
             border-radius: 0.75rem;
             background: var(--bg-secondary);
             color: var(--content-primary);
             font: var(--label-medium);
             text-transform: uppercase;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
 
             &:hover {
                 background: var(--bg-tertiary);
-                border: 1px solid var(--gradient-border);
+            }
+
+            &:active,
+            &:focus-visible {
+                border-color: var(--content-brand);
+                background: var(--bg-tertiary);
+                outline: none;
             }
 
             & img {

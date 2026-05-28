@@ -12,7 +12,7 @@
 <body>
   <div class="container">
     <div class="logo">
-        <img src="assets/logo.svg" alt="Logo">
+        <img src="assets/logo.svg" alt="" aria-hidden="true">
         <h2>NUMBERS</h2>
     </div>
 
@@ -25,55 +25,137 @@
 
             <div class="card">
               <div>
-                  <img src="assets/person-brand.svg" alt="">
+                  <img src="assets/person-brand.svg" alt="" aria-hidden="true">
                   <h3>Como funciona o sorteador de números?</h3>
                 </div>
-                  <p id="description">O sorteador utiliza um algoritmo de geração aleatória para criar <br> números dentro do intervalo especificado pelo usuário.</p> 
+                  <p class="description">O sorteador utiliza um algoritmo de geração aleatória para criar <br> números dentro do intervalo especificado pelo usuário.</p> 
                 
                <div>
-                  <img src="assets/person-brand.svg" alt="">
+                  <img src="assets/person-brand.svg" alt="" aria-hidden="true">
                   <h3>Posso escolher o intervalo dos números?</h3>
                 </div>
-                  <p id="description">Sim, você pode definir os valores mínimo e máximo para o <br> intervalo dos números sorteados.</p>
+                  <p class="description">Sim, você pode definir os valores mínimo e máximo para o <br> intervalo dos números sorteados.</p>
             </div>
 
-            <aside>
-                <h2>Quero sortear:</h2>
-                <p>Defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados na tela. É rápido e fácil!</p>
+            <aside aria-labelledby="sorteador-title">
+                <h2 id="sorteador-title">Quero sortear:</h2>
+                <p id="sorteador-desc">Defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados na tela. É rápido e fácil!</p>
 
-                <div class="input-numbers">
-                    <div class="fields-row">
-                        <div class="field">
-                            <label for="numeros">NÚMEROS</label>
-                            <input type="number" id="numeros" placeholder="2">
+                <form id="sorteador-form" aria-labelledby="sorteador-title sorteador-desc">
+                    <fieldset class="input-numbers">
+                        <legend class="visually-hidden">Configuração do sorteio</legend>
+
+                        <div class="fields-row">
+                            <div class="field">
+                                <label for="numeros">
+                                    <span aria-hidden="true">NÚMEROS</span>
+                                    <span class="visually-hidden">Quantidade de números a sortear</span>
+                                </label>
+                                <input
+                                    type="number"
+                                    step="1"
+                                    id="numeros"
+                                    name="numeros"
+                                    placeholder="0"
+                                    min="1"
+                                    inputmode="numeric"
+                                    aria-describedby="numeros-hint draw-status"
+                                    required
+                                >
+                                <span id="numeros-hint" class="visually-hidden">Informe quantos números deseja sortear.</span>
+                            </div>
+                            <div class="field">
+                                <label for="de">
+                                    <span aria-hidden="true">DE</span>
+                                    <span class="visually-hidden">Valor mínimo do intervalo</span>
+                                </label>
+                                <input
+                                    type="number"
+                                    step="1"
+                                    id="de"
+                                    name="de"
+                                    placeholder="0"
+                                    inputmode="numeric"
+                                    aria-describedby="de-hint draw-status"
+                                    required
+                                >
+                                <span id="de-hint" class="visually-hidden">Informe o menor número do intervalo.</span>
+                            </div>
+                            <div class="field">
+                                <label for="ate">
+                                    <span aria-hidden="true">ATÉ</span>
+                                    <span class="visually-hidden">Valor máximo do intervalo</span>
+                                </label>
+                                <input
+                                    type="number"
+                                    step="1"
+                                    id="ate"
+                                    name="ate"
+                                    placeholder="0"
+                                    inputmode="numeric"
+                                    aria-describedby="ate-hint draw-status"
+                                    required
+                                >
+                                <span id="ate-hint" class="visually-hidden">Informe o maior número do intervalo.</span>
+                            </div>
                         </div>
-                        <div class="field">
-                            <label for="de">DE</label>
-                            <input type="number" id="de" placeholder="1">
-                        </div>
-                        <div class="field">
-                            <label for="ate">ATÉ</label>
-                            <input type="number" id="ate" placeholder="100">
-                        </div>
-                    </div>
-                    
-                    <div class="toggle-button">
-                        <label class="switch" for="nao-repetir">
-                          <input type="checkbox" id="nao-repetir" name="nao-repetir">
-                          <span class="slider"></span>
+
+                        <label class="toggle-button">
+                            <span class="switch">
+                                <input type="checkbox" id="nao-repetir" name="nao-repetir">
+                                <span class="slider" aria-hidden="true"></span>
+                            </span>
+                            <span>Não repetir números</span>
                         </label>
-                        <span>Não repetir números</span>
-                      </div>
 
-                    <div class="draw-button">
-                     <button type="button">SORTEAR
-                        <img src="assets/arrow-btn.svg" alt="">
-                     </button>                    
-                    </div>
-                </div>
+                        <div
+                            id="draw-status"
+                            class="feedback-message feedback-message--error"
+                            role="alert"
+                            aria-live="assertive"
+                            aria-atomic="true"
+                        ></div>
+
+                        <div
+                            id="draw-success"
+                            class="feedback-message feedback-message--success"
+                            role="status"
+                            aria-live="polite"
+                            aria-atomic="true"
+                        ></div>
+
+                        <div class="draw-button">
+                            <button type="submit" id="btn-sortear">
+                                SORTEAR
+                                <img src="assets/arrow-btn.svg" alt="" aria-hidden="true">
+                            </button>
+                        </div>
+
+                        <div class="draw-button draw-button--again hidden" id="draw-again">
+                            <button type="button" id="btn-sortear-novamente">
+                                SORTEAR NOVAMENTE
+                                <img src="assets/return-btn.svg" alt="" aria-hidden="true">
+                            </button>
+                        </div>
+
+                        <section
+                            class="draw-results hidden"
+                            id="draw-results"
+                            role="region"
+                            aria-labelledby="draw-results-heading"
+                        >
+                            <h3 id="draw-results-heading" class="visually-hidden">Números sorteados</h3>
+                            <p id="draw-results-summary" class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
+                            <div class="draw-results__stage">
+                                <div class="draw-results__list" id="draw-results-list" role="list"></div>
+                            </div>
+                        </section>
+                    </fieldset>
+                </form>
             </aside>
         </div>
     </main>
-  </div>  
+  </div> 
+  <script src="script.js"></script>
 </body>
 </html>

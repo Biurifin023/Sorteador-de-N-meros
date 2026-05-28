@@ -1,0 +1,126 @@
+/* Animação do número sorteado — disparada via JS com .is-animating */
+
+.draw-results {
+    --draw-animation-duration: 1.8s;
+    --draw-animation-stagger: 0.2s;
+    --tile-size: 5.5rem;
+    --tile-radius: 1rem;
+    --tile-color: var(--content-brand);
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: 8rem;
+    margin-top: 1.5rem;
+}
+
+.draw-results.hidden {
+    display: none;
+}
+
+.draw-results__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.draw-results__stage {
+    position: relative;
+    width: 100%;
+    min-height: var(--tile-size);
+}
+
+/* ---- Tile (quadrado + número) ---- */
+
+.number-tile {
+    --tile-index: 0;
+
+    position: relative;
+    width: var(--tile-size);
+    height: var(--tile-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.number-tile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--tile-radius);
+    background-color: var(--tile-color);
+    z-index: 0;
+    transform-origin: center center;
+}
+
+.number-tile__value {
+    position: relative;
+    z-index: 1;
+    font: var(--display-small);
+    color: transparent;
+    user-select: none;
+    line-height: 1;
+}
+
+/* Estado final (JS remove .is-animating e aplica .is-revealed) */
+.number-tile.is-revealed {
+    animation: none;
+    transform: rotate(0deg);
+}
+
+.number-tile.is-revealed::before {
+    opacity: 0;
+}
+
+.number-tile.is-revealed .number-tile__value {
+    color: var(--tile-color);
+    opacity: 1;
+}
+
+/* ---- Animação (ativa com .is-animating no tile ou no container) ---- */
+
+.number-tile.is-animating,
+.draw-results.is-animating .number-tile:not(.is-revealed) {
+    animation: number-tile-spin var(--draw-animation-duration) linear infinite;
+    animation-delay: calc(var(--tile-index) * var(--draw-animation-stagger));
+}
+
+.number-tile.is-animating::before,
+.draw-results.is-animating .number-tile::before {
+    opacity: 1;
+}
+
+.number-tile.is-animating .number-tile__value,
+.draw-results.is-animating .number-tile .number-tile__value {
+    opacity: 1;
+    color: var(--color-inverse);
+}
+
+/* Giro contínuo em loop até o JS aplicar .is-revealed */
+@keyframes number-tile-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .number-tile.is-animating,
+    .draw-results.is-animating .number-tile:not(.is-revealed) {
+        animation: none;
+        transform: none;
+    }
+
+    .number-tile.is-animating .number-tile__value,
+    .draw-results.is-animating .number-tile .number-tile__value {
+        opacity: 1;
+        color: var(--color-inverse);
+    }
+}
