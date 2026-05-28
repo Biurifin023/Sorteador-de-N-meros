@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Sorteador de números</title>
+    <link rel="stylesheet" href="styles.css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Mono:wght@100..700&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+        <img src="assets/logo.svg" alt="Logo">
+        <h2>NUMBERS</h2>
+    </div>
+
+    <main>
+        <div class="main-content">
+            <div class="header"> 
+             <span>Online - Gratuito</span>
+             <h1>Sorteador <br>de números</h1>
+            </div>
+
+            <div class="card">
+              <div>
+                  <img src="assets/person-brand.svg" alt="">
+                  <h3>Como funciona o sorteador de números?</h3>
+                </div>
+                  <p id="description">O sorteador utiliza um algoritmo de geração aleatória para criar <br> números dentro do intervalo especificado pelo usuário.</p> 
+                
+               <div>
+                  <img src="assets/person-brand.svg" alt="">
+                  <h3>Posso escolher o intervalo dos números?</h3>
+                </div>
+                  <p id="description">Sim, você pode definir os valores mínimo e máximo para o <br> intervalo dos números sorteados.</p>
+            </div>
+
+            <aside>
+                <h2>Quero sortear:</h2>
+                <p>Defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados na tela. É rápido e fácil!</p>
+
+                <div class="input-numbers">
+                    <div class="fields-row">
+                        <div class="field">
+                            <label for="numeros">NÚMEROS</label>
+                            <input type="number" id="numeros" placeholder="2">
+                        </div>
+                        <div class="field">
+                            <label for="de">DE</label>
+                            <input type="number" id="de" placeholder="1">
+                        </div>
+                        <div class="field">
+                            <label for="ate">ATÉ</label>
+                            <input type="number" id="ate" placeholder="100">
+                        </div>
+                    </div>
+                    
+                    <div class="toggle-button">
+                        <label class="switch" for="nao-repetir">
+                          <input type="checkbox" id="nao-repetir" name="nao-repetir">
+                          <span class="slider"></span>
+                        </label>
+                        <span>Não repetir números</span>
+                      </div>
+
+                    <div class="draw-button">
+                     <button type="button">SORTEAR
+                        <img src="assets/arrow-btn.svg" alt="">
+                     </button>                    
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+  </div>  
+</body>
+</html>
