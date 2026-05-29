@@ -49,7 +49,7 @@
 }
 
 .container {
-    background-image: url(/assets/bg-img.png);
+    background-image: url(../assets/bg-img.png);
     background-color: var(--bg-primary);
     
     width: 100%;
